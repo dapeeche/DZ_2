@@ -68,11 +68,19 @@ class ValueObject {
 
 }
 
-$color = new ValueObject(48,73,110);
+$color = new ValueObject(48,88,110);
 
 echo "<pre>";
 print_r($color);
 echo "</pre>\n";
+
+$color->setRed();
+$color->setGreen();
+$color->setBlue();
+
+$color->getRed();
+$color->getGreen();
+$color->getBlue();
 
 echo $color->equals();
 
