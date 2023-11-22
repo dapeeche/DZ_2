@@ -2,9 +2,9 @@
 
 
 class ValueObject {
-    private int $red;
-    private int $green;
-    private int $blue;
+    private $red;
+    private $green;
+    private $blue;
 
     public function __construct($red, $green, $blue) {
         $this->red = $red;
@@ -48,31 +48,40 @@ class ValueObject {
 
     public function equals() {
         if ($this->red == $this->green && $this->green == $this->blue) {
-            echo "colors are equal";
+            return true;
         } else {
-            echo "colors are NOT equal";
+            return false;
         }
     }
 
-    public function rand() {
+    public static function random() {
 
+        return new ValueObject(rand(0,255),rand(0,255),rand(0,255));
+    }
+
+    public function mix($addedColors) {
+        $mixedRed = ($this->red + $addedColors->red) / 2;
+        $mixedGreen = ($this->green + $addedColors->green) / 2;
+        $mixedBlue = ($this->blue + $addedColors->blue) / 2;
+        return new ValueObject($mixedRed, $mixedGreen, $mixedBlue);
     }
 
 }
 
-$color = new ValueObject(252,252,252);
+$color = new ValueObject(48,73,110);
 
 echo "<pre>";
 print_r($color);
 echo "</pre>\n";
 
-$color->setRed();
-$color->setGreen();
-$color->setBlue();
+echo $color->equals();
 
-$color->getRed();
-$color->getGreen();
-$color->getBlue();
+$randomColor = $color::random();
+echo "<pre>";
+print_r($randomColor);
+echo "</pre>\n";
 
-$color->equals();
-
+$mixedColor = $color->mix(new ValueObject(100,100,100));
+echo "<pre>";
+print_r($mixedColor);
+echo "</pre>\n";
